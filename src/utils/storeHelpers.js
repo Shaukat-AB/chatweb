@@ -14,10 +14,9 @@ import {
 } from "firebase/firestore";
 import { db } from "../firebase";
 
-
 export const getDocuments = async (col, ids) => {
-    if(ids.length < 1) return null;
-    const q = query(collection(db, col), where(documentId(),'in', ids));
+    if (ids.length < 1) return null;
+    const q = query(collection(db, col), where(documentId(), "in", ids));
     const obj = {};
     let i = 0;
     try {
@@ -27,19 +26,19 @@ export const getDocuments = async (col, ids) => {
             obj[ids[i]] = data;
             i += 1;
         });
-        console.log("get ", col," documents: ", obj);
+        console.log("get ", col, " documents: ", obj);
         return obj;
-    }catch(e){
-        console.error(col," getdocs failed", e);
+    } catch (e) {
+        console.error(col, " getdocs failed", e);
         return null;
     }
-}
+};
 
 export const checkUserId = async (uid) => {
     let res = null;
-    try{
+    try {
         res = await getDocument(createDocRef("User", uid));
-    }catch(e){
+    } catch (e) {
         console.error(uid, " failed", e);
     }
     return res;
@@ -47,9 +46,9 @@ export const checkUserId = async (uid) => {
 
 export const checkChannelId = async (id) => {
     let res = null;
-    try{
+    try {
         res = await getDocument(createDocRef("Channel", id));
-    }catch(e){
+    } catch (e) {
         console.error(id, "failed", e);
     }
     return res;
@@ -57,9 +56,9 @@ export const checkChannelId = async (id) => {
 
 export const checkDMId = async (id) => {
     let res = null;
-    try{
+    try {
         res = await getDocument(createDocRef("DM", id));
-    }catch(e){
+    } catch (e) {
         console.error(id, " failed", e);
     }
     return res;

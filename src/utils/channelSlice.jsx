@@ -5,7 +5,7 @@ const initialState = {
         title: "public channel",
         msgIds: [],
         members: [],
-        owner: { id: "shaukatalibans@gmail.com", name: "Shaukat Ali" },
+        owner: { },
         member: {},
         messages: {},
     },

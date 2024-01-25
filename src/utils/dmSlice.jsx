@@ -1,14 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
-    // "": {
-    //     msgIds: [],
-    //     members: [],
-    //     member: {},
-    //     messages: {},
-    //     },
-    // },
-};
+const initialState = {};
 
 const dmSlice = createSlice({
     name: "dms",
