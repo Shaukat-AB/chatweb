@@ -8,13 +8,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { setCurrent } from "../utils/navigationSlice";
 import { getDMName } from "../utils/stateHelpers";
 
-
 const SideBarList = ({ target, type, children }) => {
     const current = useSelector((state) => state.navigation.current);
     const currentUser = useSelector((state) => state.user.user);
     const isChannel = type !== "dm";
     const dispatch = useDispatch();
-    const iterable  = (isChannel ? currentUser?.channelIds : currentUser.dmIds) || [];
+    const iterable =
+        (isChannel ? currentUser?.channelIds : currentUser.dmIds) || [];
 
     const changeActive = (id, label, isChannel) => {
         dispatch(setCurrent({ id, label, isChannel }));
@@ -32,7 +32,7 @@ const SideBarList = ({ target, type, children }) => {
             : getDMName(user, currentUser.name)?.name;
 
         return (
-            <ListItem key={id} >
+            <ListItem key={id}>
                 <ListItemButton
                     sx={ListBtnStlye}
                     selected={current.label === label}
@@ -51,7 +51,7 @@ const SideBarList = ({ target, type, children }) => {
     });
 
     return (
-        <List sx={{width:"250px", overflow:"hidden"}}>
+        <List sx={{ width: "250px", overflow: "hidden" }}>
             {children}
             {eleList}
         </List>
@@ -66,18 +66,18 @@ const ListBtnStlye = {
 const ChannelList = ({ title }) => {
     return (
         <>
-            <ListItemText sx={{overflow:"hidden"}}>
+            <ListItemText sx={{ overflow: "hidden" }}>
                 <Typography component={"span"} mx={1}>
                     #
                 </Typography>
-                <Typography component={"span"} >{title}</Typography>
+                <Typography component={"span"}>{title}</Typography>
             </ListItemText>
         </>
     );
 };
 
 const DMList = ({ user }) => {
-    const currentUser = useSelector( (state) => state.user.user);
+    const currentUser = useSelector((state) => state.user.user);
     const target = getDMName(user, currentUser.name);
     const name = target?.name;
     const avatar = target?.avatarURL;
@@ -85,7 +85,6 @@ const DMList = ({ user }) => {
     return (
         <>
             <TextAvatar text={name} src={avatar} width={28} sx={{ mx: 1 }} />
-
             <ListItemText>{name}</ListItemText>
         </>
     );

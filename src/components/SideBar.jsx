@@ -10,7 +10,7 @@ import { navToggler } from "../utils/navigationSlice";
 import { signinToggler, setUser } from "../utils/userSlice";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { auth } from "../firebase";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const SideBar = () => {
     const isSideBarOpen = useSelector(
@@ -23,6 +23,7 @@ const SideBar = () => {
     const mdScreen = useMediaQuery("(min-width:900px)");
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const listStyle = { sx: { bgcolor: "primary.light" } }; // change bgcolor for Drawer i.e. add styles to PaperProps, listSubHeader
 
     const onSignOut = async () => {
         await auth.signOut();
@@ -37,12 +38,13 @@ const SideBar = () => {
             anchor="left"
             open={isSideBarOpen}
             onClose={() => dispatch(navToggler("isSideBarOpen"))}
+            PaperProps={listStyle}
         >
             <Grid container p={2} gap={5}>
                 <Typography variant="h6">{user.name}</Typography>
                 <Button
                     variant="outlined"
-                    sx={{ fontSize: "small" }}
+                    sx={{ fontSize: "small", fontWeight:"600", }}
                     onClick={() => onSignOut()}
                 >
                     SignOut
@@ -52,11 +54,11 @@ const SideBar = () => {
             <Divider></Divider>
 
             <SideBarList target={channels} type={"channel"}>
-                <ListSubheader>Channels</ListSubheader>
+                <ListSubheader {...listStyle}>Channels</ListSubheader>
             </SideBarList>
 
             <SideBarList target={directMessages} type={"dm"}>
-                <ListSubheader>Direct messages</ListSubheader>
+                <ListSubheader {...listStyle}>Direct messages</ListSubheader>
             </SideBarList>
         </Drawer>
     );
