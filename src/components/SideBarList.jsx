@@ -34,16 +34,27 @@ const SideBarList = ({ target, type, children }) => {
         return (
             <ListItem key={id}>
                 <ListItemButton
-                    sx={ListBtnStlye}
+                    sx={{
+                        borderRadius: "1.4rem",
+                        padding: "3px 6px",
+                        "&.Mui-selected, &.Mui-selected:hover": {
+                            bgcolor: "primary.select",
+                        },
+                    }}
                     selected={current.label === label}
                     onClick={() => changeActive(id, label, isChannel)}
                 >
                     {!user ? (
                         // render "DMList" if user is valid otherwise render "ChannelList"
-
-                        <ChannelList title={label}> </ChannelList>
+                        <ChannelList
+                            title={label}
+                            selected={current.label === label}
+                        />
                     ) : (
-                        <DMList user={user}></DMList>
+                        <DMList
+                            user={user}
+                            selected={current.label === label}
+                        />
                     )}
                 </ListItemButton>
             </ListItem>
@@ -58,34 +69,39 @@ const SideBarList = ({ target, type, children }) => {
     );
 };
 
-const ListBtnStlye = {
-    borderRadius: "2rem",
-    padding: "4px 8px",
-};
-
-const ChannelList = ({ title }) => {
+const ChannelList = ({ title, selected }) => {
+    const style = selected
+        ? { fontWeight: 600, color: "primary.contrastText" }
+        : { fontWeight: 400 }; // when item selected
+    const t = "# " + title;
     return (
         <>
             <ListItemText sx={{ overflow: "hidden" }}>
-                <Typography component={"span"} mx={1}>
-                    #
+                <Typography component={"span"} mx={1} sx={style}>
+                    {t}
                 </Typography>
-                <Typography component={"span"}>{title}</Typography>
             </ListItemText>
         </>
     );
 };
 
-const DMList = ({ user }) => {
+const DMList = ({ user, selected }) => {
     const currentUser = useSelector((state) => state.user.user);
     const target = getDMName(user, currentUser.name);
     const name = target?.name;
     const avatar = target?.avatarURL;
+    const style = selected
+        ? { fontWeight: 600, color: "primary.contrastText" }
+        : { fontWeight: 400 }; // when item selected
 
     return (
         <>
-            <TextAvatar text={name} src={avatar} width={28} sx={{ mx: 1 }} />
-            <ListItemText>{name}</ListItemText>
+            <TextAvatar text={name} src={avatar} width={30} sx={{ mx: 1 }} />
+            <ListItemText>
+                <Typography component={"span"} sx={style}>
+                    {name}
+                </Typography>
+            </ListItemText>
         </>
     );
 };

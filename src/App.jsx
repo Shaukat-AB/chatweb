@@ -16,6 +16,7 @@ const App = () => {
             primary: {
                 main: purple[100],
                 light: purple[800],
+                select: purple[400],
             },
         },
     });
@@ -25,19 +26,9 @@ const App = () => {
             primary: {
                 main: purple[500],
                 light: purple[100],
+                select: purple[400],
             },
         },
-        // components: {
-        //     MuiListItem: {
-        //         styleOverrides: {
-        //             root: {
-        //                 ".Mui-selected": {
-        //                     background: purple[500],
-        //                 },
-        //             },
-        //         },
-        //     },
-        // },
     });
     // create routes for welcome and home pages
     const router = createBrowserRouter([

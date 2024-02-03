@@ -23,7 +23,7 @@ const SideBar = () => {
     const mdScreen = useMediaQuery("(min-width:900px)");
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const listStyle = { sx: { bgcolor: "primary.light" } }; // change bgcolor for Drawer i.e. add styles to PaperProps, listSubHeader
+    const listStyle = { sx: { bgcolor: "primary.light", px: 1 } }; // change bgcolor for Drawer i.e. add styles to PaperProps, listSubHeader
 
     const onSignOut = async () => {
         await auth.signOut();
@@ -44,7 +44,7 @@ const SideBar = () => {
                 <Typography variant="h6">{user.name}</Typography>
                 <Button
                     variant="outlined"
-                    sx={{ fontSize: "small", fontWeight:"600", }}
+                    sx={{ fontSize: "small", fontWeight: "600" }}
                     onClick={() => onSignOut()}
                 >
                     SignOut
